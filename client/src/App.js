@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+/*function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +18,30 @@ function App() {
           Learn React
         </a>
       </header>
+    </div>
+  );
+}*/
+
+function App() {
+  return (
+    <div className="layout">
+      <aside className="sidebar sidebar-left">
+         <div className="logo">TETRIS-VIBE</div>
+         
+         <div className="play-for">
+          <div className="divider"></div>
+          <div className="play-for-title">I play for :</div>
+          <div className="divider"></div>
+        </div>
+      </aside>
+
+      <main className="content">
+        Center
+      </main>
+
+      <aside className="sidebar sidebar-right">
+        Right
+      </aside>
     </div>
   );
 }
