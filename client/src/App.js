@@ -153,6 +153,7 @@ function Tetris() {
   const [board, setBoard] = useState(createEmptyBoard);
   const [piece, setPiece] = useState(randomPiece);
   const [score, setScore] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   function isValidMove(testPiece, currentBoard = board) {
     for (let y = 0; y < testPiece.shape.length; y++) {
@@ -257,20 +258,26 @@ function Tetris() {
   }
 
   function moveDown() {
-    if (!move(0, 1)) {
-      lockPiece();
-    }
+  if (isPaused) return;
+
+  if (!move(0, 1)) {
+    lockPiece();
   }
+}
 
   function moveLeft() {
+    if (isPaused) return;
     move(-1, 0);
   }
 
   function moveRight() {
+    if (isPaused) return;
     move(1, 0);
   }
 
   function rotate() {
+    if (isPaused) return;
+
     const rotatedPiece = {
       ...piece,
       shape: rotateShape(piece.shape),
@@ -282,15 +289,19 @@ function Tetris() {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      moveDown();
-    }, 600);
+  if (isPaused) return;
 
-    return () => clearInterval(interval);
-  });
+  const interval = setInterval(() => {
+    moveDown();
+  }, 600);
+
+  return () => clearInterval(interval);
+  }, [isPaused, piece, board]);
 
   useEffect(() => {
     function handleKeyDown(event) {
+      if (isPaused) return;
+
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
         moveLeft();
@@ -373,7 +384,19 @@ function Tetris() {
         <button onClick={rotate}>↻</button>
         <button onClick={moveDown}>↓</button>
         <button onClick={moveRight}>→</button>
+
+        <button
+          className="pause-button"
+          onClick={() => setIsPaused(prev => !prev)}
+        >
+          {isPaused ? 'RESUME' : 'PAUSE'}
+        </button>
       </div>
+      {isPaused && (
+  <div className="pause-overlay">
+    PAUSED
+  </div>
+)}
     </div>
   );
 }

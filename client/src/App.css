@@ -290,3 +290,34 @@ body {
     height: 38px;
   }
 }
+
+.pause-button {
+  width: auto !important;
+  min-width: 80px;
+  padding: 0 10px;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.tetris-container {
+  position: relative;
+}
+
+.pause-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 12px 20px;
+
+  background: rgba(51, 51, 51, 0.9);
+  color: white;
+
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  border-radius: 4px;
+}
