@@ -183,3 +183,110 @@ body {
   margin-top: 20px;
   margin-bottom: 30px;
 }
+
+/* =========================
+   TETRIS
+   ========================= */
+
+.tetris-container {
+  width: min(90%, 420px);
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Верхняя строка */
+
+.tetris-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.tetris-score {
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+}
+
+/* Игровое поле */
+
+.tetris-board {
+  width: 100%;
+  aspect-ratio: 1 / 2;
+  display: grid;
+
+  background: #eeeeee;
+  border: 2px solid #333333;
+}
+
+/* Клетки */
+
+.tetris-cell {
+  border: 1px solid #dddddd;
+  background: #f5f5f5;
+}
+
+.tetris-cell.cell-1 {
+  background: #777777;
+  border-color: #666666;
+}
+
+.tetris-cell.cell-2 {
+  background: #333333;
+  border-color: #222222;
+}
+
+/* Кнопки */
+
+.tetris-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tetris-controls button {
+  width: 48px;
+  height: 40px;
+
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+
+  background: #eeeeee;
+  color: #333333;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.tetris-controls button:hover {
+  background: #dddddd;
+}
+
+.tetris-controls button:active {
+  background: #cccccc;
+}
+
+/* Адаптивность */
+
+@media (max-width: 768px) {
+  .tetris-container {
+    width: min(90%, 360px);
+    margin: 20px auto;
+  }
+
+  .tetris-controls button {
+    width: 44px;
+    height: 38px;
+  }
+}
