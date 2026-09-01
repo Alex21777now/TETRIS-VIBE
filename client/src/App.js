@@ -26,6 +26,10 @@ import gb from './images/gb.jpg';
 }*/
 
 function App() {
+
+  const [selectedCountry, setSelectedCountry] = useState('USA');
+  const [score, setScore] = useState(0);
+
   return (
     <div className="layout">
       <aside className="sidebar sidebar-left">
@@ -43,13 +47,21 @@ function App() {
     <div className="game-panel">
       <div className="game-info">
         <label className="radio-option">
-          <input type="radio" name="country" />
+          <input
+              type="radio"
+              name="country"
+              value="USA"
+              checked={selectedCountry === 'USA'}
+              onChange={() => setSelectedCountry('USA')}
+          />
           <span>USA</span>
         </label>
 
         <div className="scoreboard">
           <span className="score-label">SCORE</span>
-          <span className="score-value">000000</span>
+          <span className="score-value">{selectedCountry === 'USA'
+                 ? String(score).padStart(6, '0')
+                 : '000000'}</span>
         </div>
       </div>
 
@@ -59,13 +71,21 @@ function App() {
      <div className="game-panel game-panel-uk">
   <div className="game-info">
     <label className="radio-option">
-      <input type="radio" name="country" />
+           <input
+             type="radio"
+             name="country"
+             value="UK"
+             checked={selectedCountry === 'UK'}
+             onChange={() => setSelectedCountry('UK')}
+           />
       <span>UK</span>
     </label>
 
     <div className="scoreboard">
       <span className="score-label">SCORE</span>
-      <span className="score-value">000000</span>
+      <span className="score-value">{selectedCountry === 'UK'
+             ? String(score).padStart(6, '0')
+             : '000000'}</span>
     </div>
   </div>
 
@@ -79,7 +99,7 @@ function App() {
 </aside>
 
       <main className="content">
-        <Tetris />
+        <Tetris onScoreChange={setScore} />
       </main>
 
       <aside className="sidebar sidebar-right">
@@ -149,10 +169,13 @@ function rotateShape(shape) {
   );
 }
 
-function Tetris() {
+function Tetris({ onScoreChange }) {
   const [board, setBoard] = useState(createEmptyBoard);
   const [piece, setPiece] = useState(randomPiece);
   const [score, setScore] = useState(0);
+  useEffect(() => {
+         onScoreChange(score);
+                  }, [score, onScoreChange]);
   const [isPaused, setIsPaused] = useState(false);
 
   function isValidMove(testPiece, currentBoard = board) {
