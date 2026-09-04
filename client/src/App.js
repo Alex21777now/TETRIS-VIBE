@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import us from './images/us.png';
 import gb from './images/gb.jpg';
+import CollidingScopes from './CollidingScopes';
 
 /*function App() {
   return (
@@ -103,7 +104,8 @@ function App() {
       </main>
 
       <aside className="sidebar sidebar-right">
-        Right
+
+        <CollidingScopes />
       </aside>
     </div>
   );
